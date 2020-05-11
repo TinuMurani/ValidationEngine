@@ -8,28 +8,17 @@ namespace ValidationEngine.Library
     {
         public override bool IsValidData(object inputData)
         {
-            bool output = false;
+            string data = inputData as string;
 
-            //vreau sa ma asigur ca ceea ce vine de la API este un string, 
-            //chiar daca voi face validari si la introducerea datelor
-            string transform = inputData.ToString() ?? "";
-
-            //enuntul solicita un string de numere pentru CNP
-            //trebuie sa ma asigur ca sunt pozitive si daca nu sunt sa returnam faptul ca nu este valid
-            for (int i = 0; i < transform.Length; i++)
+            foreach (Char c in data.ToCharArray())
             {
-                if (uint.TryParse(transform[i].ToString(), out uint result))
+                if (!Char.IsDigit(c))
                 {
-                    output = true;
-                }
-                else
-                {
-                    output = false;
-                    break;
+                    return false;
                 }
             }
 
-            return output;
+            return true;
         }
     }
 }

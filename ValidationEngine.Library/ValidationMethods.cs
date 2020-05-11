@@ -22,7 +22,7 @@ namespace ValidationEngine.Library
                     validator = new NumberValidator();
                     break;
                 case UserDataTypes.AgeType:
-                    validator = new AgeValidator();
+                    validator = new AgeValidator(18, 120);
                     break;
                 default:
                     validator = null;

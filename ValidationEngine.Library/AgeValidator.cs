@@ -6,16 +6,23 @@ namespace ValidationEngine.Library
 {
     internal class AgeValidator : BaseValidator
     {
+        public AgeValidator(int from, int to)
+        {
+            From = from;
+            To = to;
+        }
+
+        public int From { get; }
+        public int To { get; }
+
         public override bool IsValidData(object inputData)
         {
-            if (inputData.GetType().Equals(typeof(int)) && Convert.ToInt32(inputData) >= 18)
+            if (inputData is int data)
             {
-                return true;
+                return (data >= From) && (To >= data);
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
     }
 }
